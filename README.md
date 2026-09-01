@@ -31,7 +31,3 @@ durante la parte teórica del mini-taller.
 En [`demostracion/`](./demostracion/) se encuentra una demostración práctica
 de compilación multiplataforma utilizando Docker, BuildKit y Go.
 
-La demostración parte de un Development Host:
-
-```text
-linux/amd64
