@@ -6,11 +6,10 @@ Repositorio del mini-taller **“Desarrollo de software embebido a partir de con
 
 Mostrar cómo Docker puede utilizarse en el desarrollo de software embebido para:
 
-- mantener un entorno de construcción controlado;
+- crear entornos de ejecución y desarrollo aislados;
+- mantener herramientas y dependencias dentro de contenedores;
 - construir software para arquitecturas diferentes a la del host;
-- comprender la diferencia entre usar Docker en el **Development Host** y ejecutar contenedores directamente en el **Embedded Target**.
-
-La demostración principal utiliza una computadora `linux/amd64` para generar un binario `linux/arm64` mediante Docker, BuildKit y cross-compilation.
+- comprender la diferencia entre usar Docker en el **Development Host** y ejecutar contenedores directamente en un **Embedded Target**.
 
 ## Contenido del repositorio
 
@@ -32,9 +31,55 @@ Los temas principales son:
 
 ### Demostración
 
-En [`demostracion/`](./demostracion/) se encuentra la demostración paso a paso.
+En [`demostracion/`](./demostracion/) se encuentra una demostración básica del funcionamiento de Docker.
 
-El flujo principal es:
+La actividad compara el sistema operativo del host con el entorno de usuario dentro de un contenedor Alpine Linux.
+
+Ejemplo:
+
+```bash
+cat /etc/os-release
+```
+
+Luego:
+
+```bash
+docker run --rm alpine:3.20 cat /etc/os-release
+```
+
+Esto permite observar que el **host puede utilizar Ubuntu**, mientras el contenedor utiliza un entorno Alpine Linux.
+
+También se ejecuta un comando sencillo dentro del contenedor:
+
+```bash
+docker run --rm alpine:3.20 echo "Hola desde un contenedor Docker"
+```
+
+La demostración introduce de forma simple los conceptos de:
+
+- imagen;
+- contenedor;
+- ejecución aislada;
+- uso de `docker run`;
+- eliminación automática del contenedor mediante `--rm`.
+
+### Tutorial guiado
+
+En [`tutorial/`](./tutorial/) se encuentra el ejercicio práctico que realizan los participantes.
+
+El tutorial comienza desde la preparación del entorno e incluye:
+
+- instalación y verificación de Docker;
+- configuración de permisos;
+- creación de una aplicación en Go;
+- creación del Dockerfile;
+- configuración de Docker Buildx y BuildKit;
+- compilación para `linux/amd64`;
+- cross-compilation para `linux/arm64`;
+- verificación de los binarios generados;
+- troubleshooting de errores comunes.
+
+El flujo principal del tutorial es:
 
 ```text
 Development Host
@@ -46,11 +91,13 @@ Docker + BuildKit
       v
 Cross-compilation
       |
-      v
-Binario linux/arm64
+      +-------------------+
+      |                   |
+      v                   v
+Binario AMD64         Binario ARM64
 ```
 
-La arquitectura de los binarios se verifica con:
+La arquitectura de los ejecutables se verifica con:
 
 ```bash
 file out-amd64/app out-arm64/app
@@ -63,24 +110,9 @@ out-amd64/app: ... x86-64 ...
 out-arm64/app: ... ARM aarch64 ...
 ```
 
-El `README.md` dentro de `demostracion/` incluye instalación, ejecución y troubleshooting.
-
-### Tutorial guiado
-
-En [`tutorial/`](./tutorial/) se incluirá el ejercicio práctico que realizarán los participantes.
-
 ### Referencias
 
 Las fuentes técnicas y académicas utilizadas se encuentran en [`recursos/referencias.md`](./recursos/referencias.md).
-
-## Requisitos para la demostración
-
-- Ubuntu Linux
-- Docker Engine
-- Docker Buildx
-- BuildKit
-- acceso a Internet
-- comando `file`
 
 ## Referencias principales
 
