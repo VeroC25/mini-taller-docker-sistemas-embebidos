@@ -928,32 +928,8 @@ Machine: AArch64
 
 ---
 
-# 23. Warning posible: `RedundantTargetPlatform`
 
-Puede aparecer:
-
-```text
-RedundantTargetPlatform:
-Setting platform to predefined $TARGETPLATFORM in FROM is redundant
-```
-
-Esto ocurre si el Dockerfile utiliza:
-
-```dockerfile
-FROM --platform=$TARGETPLATFORM alpine:3.20 AS runtime
-```
-
-Cambiarlo por:
-
-```dockerfile
-FROM alpine:3.20 AS runtime
-```
-
-El Dockerfile mostrado en este tutorial ya utiliza la versión corregida.
-
----
-
-# 24. Si el build tarda mucho
+# 23. Si el build tarda mucho
 
 La primera ejecución puede tardar porque Docker debe descargar:
 
@@ -967,7 +943,7 @@ Las siguientes ejecuciones normalmente serán más rápidas porque BuildKit util
 
 ---
 
-# 25. Si `file out-arm64/app` muestra `x86-64`
+# 24. Si `file out-arm64/app` muestra `x86-64`
 
 Revisar que el comando utilizado tenga:
 
@@ -993,7 +969,7 @@ el build fue solicitado para la arquitectura equivocada.
 
 ---
 
-# 26. Si el binario ARM64 se ejecuta correctamente en x86-64
+# 25. Si el binario ARM64 se ejecuta correctamente en x86-64
 
 Puede ocurrir si el sistema tiene una capa de emulación configurada.
 
@@ -1017,7 +993,7 @@ AArch64
 
 ---
 
-# 27. Resultado final
+# 26. Resultado final
 
 Al finalizar deben existir:
 
