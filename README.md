@@ -35,26 +35,6 @@ En [`demostracion/`](./demostracion/) se encuentra una demostración básica del
 
 La actividad compara el sistema operativo del host con el entorno de usuario dentro de un contenedor Alpine Linux.
 
-Ejemplo:
-
-```bash
-cat /etc/os-release
-```
-
-Luego:
-
-```bash
-docker run --rm alpine:3.20 cat /etc/os-release
-```
-
-Esto permite observar que el **host puede utilizar Ubuntu**, mientras el contenedor utiliza un entorno Alpine Linux.
-
-También se ejecuta un comando sencillo dentro del contenedor:
-
-```bash
-docker run --rm alpine:3.20 echo "Hola desde un contenedor Docker"
-```
-
 La demostración introduce de forma simple los conceptos de:
 
 - imagen;
@@ -95,12 +75,6 @@ Cross-compilation
       |                   |
       v                   v
 Binario AMD64         Binario ARM64
-```
-
-La arquitectura de los ejecutables se verifica con:
-
-```bash
-file out-amd64/app out-arm64/app
 ```
 
 Resultado esperado:
